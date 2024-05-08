@@ -1,8 +1,12 @@
-from django.urls import path
-from apps.catigories.views import CatigoryViewSet, CatigoryDetailAPI
+from rest_framework.routers import DefaultRouter
+from django.urls import path 
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 
-urlpatterns = [
-    path('api/categories/', CatigoryViewSet.as_view(), name='api/categories/'),
-    path('api/categories/<int:pk>/', CatigoryDetailAPI.as_view(), name="api_category_detail")
-]
+from apps.catigories.views import CatigoryAPI
+
+router = DefaultRouter()
+router.register('catigories', CatigoryAPI, basename='api_catigories')
+
+
+urlpatterns = router.urls
